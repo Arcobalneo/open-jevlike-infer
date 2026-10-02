@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="docs/assets/cover.png" alt="open-jevlike-infer: inputs (text, images, video) flow through a server into per-option probabilities" width="100%">
+
 # open-jevlike-infer
 
 **Production inference server for open Jev-like decision models.**

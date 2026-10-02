@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="docs/assets/cover.png" alt="open-jevlike-infer：文本、图片、视频输入经推理服务输出每个选项的概率" width="100%">
+
 # open-jevlike-infer
 
 **开源 Jev 类决策模型的生产级推理服务**
