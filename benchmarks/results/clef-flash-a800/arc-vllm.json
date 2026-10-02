@@ -1,0 +1,12 @@
+{
+ "ARC-Challenge": {
+  "n": 1172,
+  "accuracy": 98.6,
+  "seconds": 29.8
+ },
+ "ARC-Easy": {
+  "n": 2376,
+  "accuracy": 99.6,
+  "seconds": 59.5
+ }
+}

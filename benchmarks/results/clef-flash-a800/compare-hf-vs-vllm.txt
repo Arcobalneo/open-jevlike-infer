@@ -1,0 +1,11 @@
+department   top_same=True  TV=0.0006
+urgency      top_same=True  TV=0.0007
+outage       top_same=True  TV=0.0067
+status       top_same=True  TV=0.0001
+large        top_same=True  TV=0.0002
+intent       top_same=True  TV=0.0000
+closed       top_same=True  TV=0.0006
+second       top_same=True  TV=0.0000
+color        top_same=True  TV=0.0002
+
+max TV 0.0067, mismatches 0

@@ -1,0 +1,22 @@
+name: Model support request
+description: Ask for an open Jev-like decision model to be supported
+labels: [model-request]
+body:
+  - type: input
+    id: model
+    attributes:
+      label: Model
+      description: Link to the weights.
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: License, backbone architecture, how it scores options (head, label tokens, ...), and the reference inference code.
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Use case

@@ -1,0 +1,23 @@
+# docker compose -f deploy/docker/compose.yaml up -d
+# Download the weights first: python scripts/download_model.py --model clef-flash --dir ./models/clef-flash
+services:
+  jevlike-infer:
+    build:
+      context: ../..
+      dockerfile: deploy/docker/Dockerfile
+    image: open-jevlike-infer:latest
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../../models/clef-flash:/models/clef-flash:ro
+    environment:
+      JEVLIKE_MODEL: clef-flash
+      # JEVLIKE_API_KEY: change-me
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ["0"]
+              capabilities: [gpu]
+    restart: unless-stopped

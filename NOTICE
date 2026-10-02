@@ -1,0 +1,21 @@
+open-jevlike-infer
+Copyright 2026 Arcobalneo and contributors
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+It builds on the following work:
+
+* Cloudflare Clef-Flash (https://huggingface.co/Cloudflare/clef-flash), Apache License 2.0.
+  The model weights and the release code (joint_schema_model.py) are not redistributed here; they are
+  downloaded from the model repository and imported at run time.
+
+* simonlehmann/clef-NVFP4 (https://huggingface.co/simonlehmann/clef-NVFP4), Apache License 2.0.
+  The approach of running the backbone as a vLLM pooling model with the joint schema head on top
+  comes from its clef_vllm.py. src/jevlike_infer/models/clef_flash/vllm_backend.py is derived from it
+  and modified: correct media placeholder handling for videos, a token-level check of vLLM's
+  expansion, and cross-request micro-batching.
+
+* vLLM (https://github.com/vllm-project/vllm), Apache License 2.0, used as a dependency.
+
+"Jev" and "SystemOne" refer to TypeSafe AI's decision API, whose request and response format this
+project implements. This project is not affiliated with TypeSafe AI or Cloudflare.

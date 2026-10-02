@@ -1,0 +1,12 @@
+tokens=   199  first=     370 ms  second=     92 ms  +1 token=     77 ms
+tokens=   401  first=     163 ms  second=    199 ms  +1 token=    169 ms
+tokens=  1351  first=     217 ms  second=    172 ms  +1 token=    159 ms
+tokens=  2639  first=     252 ms  second=    213 ms  +1 token=    223 ms
+tokens=  5141  first=     408 ms  second=    406 ms  +1 token=    400 ms
+tokens=  7157  first=     530 ms  second=    542 ms  +1 token=    558 ms
+tokens=  8239  first=     621 ms  second=    616 ms  +1 token=    617 ms
+tokens=  9689  first=     727 ms  second=    726 ms  +1 token=    723 ms
+tokens= 11915  first=     893 ms  second=    910 ms  +1 token=    917 ms
+tokens= 13145  first=    1018 ms  second=   1028 ms  +1 token=   1020 ms
+tokens= 15151  first=    1164 ms  second=   1226 ms  +1 token=   1186 ms
+tokens= 16384  first=    1242 ms  second=   1368 ms  +1 token=   1284 ms

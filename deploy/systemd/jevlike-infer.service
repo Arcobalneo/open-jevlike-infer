@@ -1,0 +1,25 @@
+# systemd unit for open-jevlike-infer. Copy to /etc/systemd/system/, adjust paths, then:
+#   systemctl daemon-reload && systemctl enable --now jevlike-infer
+#   journalctl -u jevlike-infer -f
+[Unit]
+Description=open-jevlike-infer decision model server (POST /v1/systemone)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=jevlike
+WorkingDirectory=/opt/open-jevlike-infer
+Environment=CUDA_VISIBLE_DEVICES=0
+Environment=JEVLIKE_MODEL=clef-flash
+Environment=JEVLIKE_MODEL_PATH=/opt/models/clef-flash
+Environment=JEVLIKE_PORT=8000
+# Environment=JEVLIKE_API_KEY=change-me
+# Environment=JEVLIKE_GPU_MEMORY_UTILIZATION=0.5
+ExecStart=/opt/open-jevlike-infer/.venv/bin/jevlike-infer serve
+Restart=on-failure
+RestartSec=10
+# Loading takes ~80 s and warm-up ~15 s on an A800; give it room before systemd gives up.
+TimeoutStartSec=600
+
+[Install]
+WantedBy=multi-user.target

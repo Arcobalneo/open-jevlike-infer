@@ -1,0 +1,37 @@
+name: Bug report
+description: Something does not work as documented
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, what you got.
+    validations:
+      required: true
+  - type: textarea
+    id: request
+    attributes:
+      label: Request and response
+      description: A minimal request body that reproduces it, and the response or error.
+      render: json
+  - type: textarea
+    id: logs
+    attributes:
+      label: Server log
+      render: text
+  - type: input
+    id: model
+    attributes:
+      label: Model and backend
+      placeholder: clef-flash, vllm
+    validations:
+      required: true
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment
+      description: Output of `jevlike-infer --version`, `nvidia-smi`, and `pip list | grep -E "vllm|torch|transformers"`.
+      render: text
+    validations:
+      required: true

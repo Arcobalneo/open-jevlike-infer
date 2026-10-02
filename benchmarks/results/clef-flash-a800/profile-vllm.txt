@@ -1,0 +1,5 @@
+batch   1: encode     3.4 ms  backbone    46.5 ms  head    53.7 ms  per request  103.6 ms
+batch   1: encode     2.2 ms  backbone    34.8 ms  head     7.1 ms  per request   44.1 ms
+batch   4: encode     7.5 ms  backbone    90.7 ms  head    26.3 ms  per request   31.1 ms
+batch  16: encode    28.7 ms  backbone   315.3 ms  head   102.3 ms  per request   27.9 ms
+batch  32: encode    56.8 ms  backbone   604.1 ms  head   218.5 ms  per request   27.5 ms

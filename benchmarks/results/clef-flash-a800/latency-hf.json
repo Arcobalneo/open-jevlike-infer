@@ -1,0 +1,51 @@
+{
+ "serial": {
+  "input_tokens": 291,
+  "p50_ms": 60.0,
+  "p95_ms": 119.3
+ },
+ "concurrency": [
+  {
+   "concurrency": 1,
+   "requests_per_s": 13.9,
+   "p50_ms": 60.8,
+   "p95_ms": 139.8
+  },
+  {
+   "concurrency": 16,
+   "requests_per_s": 15.2,
+   "p50_ms": 965.4,
+   "p95_ms": 1545.2
+  }
+ ],
+ "length": [
+  {
+   "input_tokens": 447,
+   "p50_ms": 62.7
+  },
+  {
+   "input_tokens": 942,
+   "p50_ms": 95.3
+  },
+  {
+   "input_tokens": 2922,
+   "p50_ms": 271.0
+  },
+  {
+   "input_tokens": 5562,
+   "p50_ms": 441.4
+  },
+  {
+   "input_tokens": 10842,
+   "p50_ms": 853.8
+  },
+  {
+   "input_tokens": 16122,
+   "p50_ms": 1271.4
+  }
+ ],
+ "image_512": {
+  "input_tokens": 550,
+  "p50_ms": 177.1
+ }
+}
