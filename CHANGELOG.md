@@ -28,4 +28,10 @@ First release.
   request on the vLLM path.
 - vLLM's expansion is now checked token by token against Clef's encoding, not by length only.
 
+### Deployment notes
+
+- The Docker image installs `gcc`: Triton compiles kernel launchers when the server starts.
+- `scripts/install_cuda12.sh` retries interrupted wheel downloads and accepts `VLLM_WHEEL_URL` for a mirror.
+- `tests/e2e/run_e2e.py --fixture-host` lets a containerized server fetch the suite's test media.
+
 [0.1.0]: https://github.com/Arcobalneo/open-jevlike-infer/releases/tag/v0.1.0

@@ -28,6 +28,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
 BASE = ""
+FIXTURE_HOST = "127.0.0.1"
 client = httpx.Client(timeout=300)
 results: list[dict] = []
 
@@ -232,9 +233,10 @@ def serve_files(directory: Path) -> tuple[str, http.server.ThreadingHTTPServer]:
         def log_message(self, *args):
             pass
 
-    server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+    bind = "127.0.0.1" if FIXTURE_HOST == "127.0.0.1" else "0.0.0.0"
+    server = http.server.ThreadingHTTPServer((bind, 0), Handler)
     threading.Thread(target=server.serve_forever, daemon=True).start()
-    return f"http://127.0.0.1:{server.server_address[1]}", server
+    return f"http://{FIXTURE_HOST}:{server.server_address[1]}", server
 
 
 MOTION = {
@@ -911,12 +913,19 @@ def section_concurrency() -> None:
 
 
 def main() -> int:
-    global BASE
+    global BASE, FIXTURE_HOST
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--base-url", default="http://127.0.0.1:8000")
     parser.add_argument("--output", help="write per-check results as JSON")
+    parser.add_argument(
+        "--fixture-host",
+        default="127.0.0.1",
+        help="address the server uses to fetch test media from this script; set it to the host IP when "
+        "the server runs in a container (e.g. 172.17.0.1)",
+    )
     args = parser.parse_args()
     BASE = args.base_url.rstrip("/")
+    FIXTURE_HOST = args.fixture_host
 
     check("GET /health", client.get(f"{BASE}/health").json().get("status") == "ok")
     check("GET /v1/models", bool(client.get(f"{BASE}/v1/models").json()["data"]))

@@ -10,7 +10,8 @@
 # packages such as numpy from the PyTorch CDN, which is slow or unreachable in some networks).
 #
 # Usage:  scripts/install_cuda12.sh [VENV_DIR]        (default .venv; needs uv: pip install uv)
-# Env:    PYTHON (default python3), PYPI_INDEX (optional mirror), GITHUB_PROXY (optional, for the wheel)
+# Env:    PYTHON (default python3), PYPI_INDEX (optional mirror), GITHUB_PROXY (optional, for the wheel),
+#         VLLM_WHEEL_URL (optional, download the vLLM wheel from a mirror instead of GitHub)
 set -euo pipefail
 
 VENV=${1:-.venv}
@@ -18,7 +19,7 @@ PYTHON=${PYTHON:-python3}
 VLLM_VERSION=0.30.0
 TORCH_INDEX=https://download.pytorch.org/whl/cu129
 WHEEL=vllm-${VLLM_VERSION}+cu129-cp38-abi3-manylinux_2_28_x86_64.whl
-WHEEL_URL=https://github.com/vllm-project/vllm/releases/download/v${VLLM_VERSION}/${WHEEL//+/%2B}
+WHEEL_URL=${VLLM_WHEEL_URL:-https://github.com/vllm-project/vllm/releases/download/v${VLLM_VERSION}/${WHEEL//+/%2B}}
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 INDEX_ARGS=()
 if [[ -n "${PYPI_INDEX:-}" ]]; then
@@ -30,7 +31,7 @@ command -v uv >/dev/null || { echo "uv not found: pip install uv" >&2; exit 1; }
 mkdir -p "$ROOT/.cache"
 if [[ ! -f "$ROOT/.cache/$WHEEL" ]]; then
   echo "downloading $WHEEL"
-  curl -fL --retry 5 -C - ${GITHUB_PROXY:+-x "$GITHUB_PROXY"} -o "$ROOT/.cache/$WHEEL.part" "$WHEEL_URL"
+  curl -fL --retry 10 --retry-all-errors --retry-delay 5 -C - ${GITHUB_PROXY:+-x "$GITHUB_PROXY"} -o "$ROOT/.cache/$WHEEL.part" "$WHEEL_URL"
   mv "$ROOT/.cache/$WHEEL.part" "$ROOT/.cache/$WHEEL"
 fi
 

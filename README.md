@@ -160,6 +160,7 @@ model's own head scores the options. Details: [docs/architecture.md](docs/archit
 ```bash
 pip install -e ".[dev]" && pytest                               # unit tests, no GPU
 python tests/e2e/run_e2e.py --base-url http://127.0.0.1:8000    # 87 checks against a running server
+# server in Docker: add --fixture-host 172.17.0.1 so it can fetch the suite's test media
 ```
 
 Benchmarks: [benchmarks/](benchmarks/README.md).

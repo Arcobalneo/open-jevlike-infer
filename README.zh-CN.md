@@ -128,6 +128,7 @@ curl -s http://127.0.0.1:8000/v1/systemone -H 'content-type: application/json' -
 ```bash
 pip install -e ".[dev]" && pytest                               # 单元测试，不需要 GPU
 python tests/e2e/run_e2e.py --base-url http://127.0.0.1:8000    # 对运行中的服务跑 87 项检查
+# 服务跑在 Docker 里时加 --fixture-host 172.17.0.1，容器才能取到测试用的图片和视频
 ```
 
 基准脚本见 [benchmarks/](benchmarks/README.md)。
