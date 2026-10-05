@@ -22,6 +22,16 @@ from jevlike_infer.models.clef_flash.release import import_release, to_release_r
 from jevlike_infer.models.clef_flash.tokens import VisionTokens, collapse_media_placeholders
 
 
+def engine_max_model_len(max_length: int) -> int:
+    """The context window to give vLLM for inputs that are truncated to ``max_length`` tokens.
+
+    vLLM's scheduler reserves one sampled-token slot per step even for pooling requests, so a prompt of
+    exactly ``max_model_len`` tokens is never fully scheduled and the engine spins with an idle GPU.
+    One token of headroom keeps a window-filling prompt schedulable.
+    """
+    return max_length + 1
+
+
 class ClefFlashVLLM(DecisionModel):
     def __init__(self, settings: Settings) -> None:
         # The engine runs in this process: no IPC hop per batch.
@@ -50,7 +60,7 @@ class ClefFlashVLLM(DecisionModel):
             model=str(path),
             runner="pooling",
             pooler_config=PoolerConfig(task="token_embed", tok_pooling_type="ALL", use_activation=False),
-            max_model_len=settings.max_length,
+            max_model_len=engine_max_model_len(settings.max_length),
             gpu_memory_utilization=settings.gpu_memory_utilization,
             limit_mm_per_prompt={"image": media_limit, "video": media_limit},
             enable_prefix_caching=False,
