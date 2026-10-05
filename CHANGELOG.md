@@ -2,6 +2,15 @@
 
 All notable changes are listed here. The project follows [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Fixed
+
+- A prompt that fills the whole context window (`--max-length` tokens) no longer hangs the vLLM backend.
+  vLLM reserves a sampled-token slot per scheduling step, also for pooling requests, so such a request
+  was never fully scheduled. The engine now gets a window of `max_length + 1`; inputs are still
+  truncated to `max_length`.
+
 ## [0.1.0] - 2026-10-02
 
 First release.
